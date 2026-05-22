@@ -1,48 +1,123 @@
-/* ----------------------------------------------------
-   1. THEME COLOR VARIABLES (Starts Dark First)
----------------------------------------------------- */
-:root {
-  /* Default Dark Mode Colors */
-  --bg-body: #0f172a;
-  --bg-menu: #1e293b;
-  --bg-hover: #334155;
-  --bg-active: #1e3a8a;
-  --border-main: #334155;
-  --border-line: #334155;
-  --border-dash: #475569;
-  --text-l1: #f8fafc;
-  --text-l2: #94a3b8;
-  --text-link: #cbd5e1;
-  --text-hover: #60a5fa;
-  --text-active: #93c5fd;
-  --bg-btn: #334155;
+/* ==========================================================================
+   1. MULTI-THEME COLOR ENGINE CONFIGURATIONS (Halcyon Default)
+   ========================================================================== */
+/* Theme 1: Halcyon (YOUR NEW DEFAULT) */
+:root, [data-app-theme="slate"] {
+  --bg-body: #0a1128;         /* Deep sapphire midnight canvas */
+  --bg-menu: #1c2541;         /* Dark navy block panels */
+  --bg-hover: #3a506b;        /* Medium slate blue hover backgrounds */
+  --bg-active: #1d3557;       /* Rich accent blue block selections */
+  --border-main: #3a506b;     /* Clean framework boundaries */
+  --border-line: #1c2541;     /* Sub-list division borders */
+  --border-dash: #5bc0be;     /* Vibrant cyan-blue for nested dotted stems */
+  --text-l1: #f1faee;         /* High-contrast crisp white text */
+  --text-l2: #a5cbc3;         /* Soft mist-blue subtext descriptive items */
+  --text-link: #cbd5e1;       /* Standard untouched file layout titles */
+  --text-hover: #64dfdf;      /* High-vis neon blue-green pointer focus */
+  --text-active: #4ea8de;     /* Deep sky blue active link highlights */
+  --bg-btn: #1c2541;          /* Dark navy gear container base layout buttons */
 }
 
-/* Light Mode Color Overrides (When .dark-mode class is removed) */
-body:not(.dark-mode) {
+/* Theme 2: Emerald Ocean */
+[data-app-theme="ocean"] {
+  --bg-body: #022c22;
+  --bg-menu: #064e3b;
+  --bg-hover: #0f766e;
+  --bg-active: #115e59;
+  --border-main: #0f766e;
+  --border-line: #0f766e;
+  --border-dash: #14b8a6;
+  --text-l1: #f0fdf4;
+  --text-l2: #a7f3d0;
+  --text-link: #ccfbf1;
+  --text-hover: #34d399;
+  --text-active: #2dd4bf;
+  --bg-btn: #0f766e;
+}
+
+/* Theme 3: Crimson Rage */
+[data-app-theme="crimson"] {
+  --bg-body: #1a0505;
+  --bg-menu: #2d0d0d;
+  --bg-hover: #4c1d1d;
+  --bg-active: #7f1d1d;
+  --border-main: #4c1d1d;
+  --border-line: #4c1d1d;
+  --border-dash: #991b1b;
+  --text-l1: #fee2e2;
+  --text-l2: #fca5a5;
+  --text-link: #fecaca;
+  --text-hover: #ff4d4d;
+  --text-active: #f87171;
+  --bg-btn: #4c1d1d;
+}
+
+/* Theme 4: Cyber Purple */
+[data-app-theme="cyber"] {
+  --bg-body: #120024;
+  --bg-menu: #25003e;
+  --bg-hover: #4a044e;
+  --bg-active: #701a75;
+  --border-main: #4a044e;
+  --border-line: #4a044e;
+  --border-dash: #a21caf;
+  --text-l1: #fae8ff;
+  --text-l2: #f5d0fe;
+  --text-link: #f5d0fe;
+  --text-hover: #d946ef;
+  --text-active: #e879f9;
+  --bg-btn: #4a044e;
+}
+
+/* Theme 5: Nordic Frost */
+[data-app-theme="nord"] {
+  --bg-body: #2e3440;
+  --bg-menu: #3b4252;
+  --bg-hover: #434c5e;
+  --bg-active: #4c566a;
+  --border-main: #434c5e;
+  --border-line: #434c5e;
+  --border-dash: #4c566a;
+  --text-l1: #eceff4;
+  --text-l2: #d8dee9;
+  --text-link: #e5e9f0;
+  --text-hover: #88c0d0;
+  --text-active: #8fbcbb;
+  --bg-btn: #434c5e;
+}
+
+/* Theme 6: Classic Light Mode */
+[data-app-theme="light"] {
   --bg-body: #f8fafc;
   --bg-menu: #ffffff;
   --bg-hover: #f1f5f9;
   --bg-active: #e0f2fe;
-  --border-main: #f0f0f0;
-  --border-line: #e2e8f0;
-  --border-dash: #cbd5e1;
+  --border-main: #e2e8f0;
+  --border-line: #cbd5e1;
+  --border-dash: #94a3b8;
   --text-l1: #0f172a;
   --text-l2: #475569;
-  --text-link: #1e293b;
-  --text-hover: #2563eb;
+  --text-link: #334155;
+  --text-hover: #0284c7;
   --text-active: #0369a1;
   --bg-btn: #f1f5f9;
 }
 
+/* ----------------------------------------------------
+   2. GLOBAL & LAYOUT BASE STYLES
+---------------------------------------------------- */
 *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
-body{
-    font-family: Arial, Helvetica, sans-serif;
+body {
+    background-color: var(--bg-body);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    padding: 2rem;
+    margin: 0;
+    transition: background-color 0.3s ease;
 }
 
 .container{
@@ -65,152 +140,194 @@ body{
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    position: relative; /* Anchor for settings alignment context */
 }
 
-
 /* ----------------------------------------------------
-   2. GLOBAL & LAYOUT STYLES
+   3. SETTINGS INTERFACE GEAR COMPONENT STYLING
 ---------------------------------------------------- */
-body {
-  background-color: var(--bg-body);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  padding: 2rem;
-  margin: 0;
-  transition: background-color 0.3s ease;
+.settings-container {
+    position: relative;
 }
 
-/* Minimalist Circular Toggle Button */
-.theme-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  font-size: 16px;
-  color: var(--text-l1);
-  background-color: var(--bg-btn);
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transition: transform 0.2s ease, background-color 0.3s ease;
+.settings-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    font-size: 1.3rem;
+    color: var(--text-l1);
+    background-color: var(--bg-btn);
+    border: 1px solid var(--border-main);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
 }
 
-.theme-btn:active {
-  transform: scale(0.95);
+.settings-btn:hover {
+    transform: rotate(45deg);
+    background-color: var(--bg-hover);
+}
+
+.settings-btn:active {
+    transform: scale(0.95) rotate(45deg);
+}
+
+.theme-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0.5rem;
+    background-color: var(--bg-menu);
+    border: 1px solid var(--border-main);
+    border-radius: 8px;
+    padding: 0.75rem;
+    width: 180px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    z-index: 100;
+}
+
+.theme-dropdown.open {
+    display: block;
+}
+
+.theme-dropdown h3 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-l2);
+    margin-bottom: 0.5rem;
+    padding-left: 0.5rem;
+}
+
+.theme-opt {
+    background: none;
+    border: none;
+    color: var(--text-l1);
+    width: 100%;
+    text-align: left;
+    padding: 0.4rem 0.6rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.theme-opt:hover {
+    background: var(--bg-hover);
+    color: var(--text-hover);
+}
+
+.theme-opt.active {
+    color: var(--text-hover);
+    font-weight: bold;
+    background: var(--bg-active);
 }
 
 /* ----------------------------------------------------
-   3. MENU SIDEBAR STYLES
+   4. MENU SIDEBAR STYLES
 ---------------------------------------------------- */
 .menu-container {
-  list-style-type: none;
-  margin: 0;
-  padding: 20px;
-  max-width: 280px;
-  margin: 1.2rem;
-  background-color: var(--bg-menu);
-  border-radius: 12px;
-  border: 1px solid var(--border-main);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    list-style-type: none;
+    margin: 0;
+    padding: 20px;
+    max-width: 280px;
+    margin: 1.2rem;
+    background-color: var(--bg-menu);
+    border-radius: 12px;
+    border: 1px solid var(--border-main);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Top-Level Subjects (Math, Science, Computer) */
 .menu-container > li {
-  font-weight: 600;
-  font-size: 15px;
-  color: var(--text-l1);
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text-l1);
 }
+
 .menu-container > li:not(:last-child) {
-  margin-bottom: 16px;
+    margin-bottom: 16px;
 }
 
-/* Layer 2 Sub-lists (Arithmetic, Fractions) */
 .menu-container ul {
-  list-style-type: none;
-  padding-left: 16px;
-  margin-top: 8px;
-  border-left: 1px solid var(--border-line);
-  transition: border-color 0.3s ease;
+    list-style-type: none;
+    padding-left: 16px;
+    margin-top: 8px;
+    border-left: 1px solid var(--border-line);
+    transition: border-color 0.3s ease;
 }
+
 .menu-container ul li {
-  font-weight: 500;
-  font-size: 14px;
-  color: var(--text-l2);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--text-l2);
 }
+
 .menu-container ul li:not(:last-child) {
-  margin-bottom: 12px;
+    margin-bottom: 12px;
 }
 
-/* Layer 3 Sub-lists (Clickable Leaf Links) */
 .menu-container ul ul {
-  border-left: 1px dashed var(--border-dash);
-  padding-left: 12px;
-  margin-top: 6px;
+    border-left: 1px dashed var(--border-dash);
+    padding-left: 12px;
+    margin-top: 6px;
 }
+
 .menu-container ul ul li {
-  margin-bottom: 4px;
+    margin-bottom: 4px;
 }
+
 .menu-container a {
-  display: block;
-  font-weight: 400;
-  font-size: 13px;
-  color: var(--text-link);
-  text-decoration: none;
-  padding: 6px 10px;
-  border-radius: 6px;
-  transition: all 0.2s ease;
+    display: block;
+    font-weight: 400;
+    font-size: 13px;
+    color: var(--text-link);
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
 }
 
-/* Interactive Hover & Press Effects */
 .menu-container a:hover {
-  background-color: var(--bg-hover);
-  color: var(--text-hover);
-  padding-left: 14px; /* Smooth right-slide nudge */
-}
-.menu-container a:active {
-  background-color: var(--bg-active);
-  color: var(--text-active);
+    background-color: var(--bg-hover);
+    color: var(--text-hover);
+    padding-left: 14px;
 }
 
+.menu-container a:active {
+    background-color: var(--bg-active);
+    color: var(--text-active);
+}
 
 /* ----------------------------------------------------
-   4. DROPDOWN (DETAILS & SUMMARY) CLEANUP
+   5. DROPDOWN (DETAILS & SUMMARY) CLEANUP
 ---------------------------------------------------- */
 .menu-container details {
-  display: block;
-  width: 100%;
+    display: block;
+    width: 100%;
 }
 
-/* Style the clickable summary headers */
 .menu-container summary {
-  cursor: pointer;
-  padding: 4px 0;
-  outline: none;
-  user-select: none;
-  transition: color 0.2s ease;
+    cursor: pointer;
+    padding: 4px 0;
+    outline: none;
+    user-select: none;
+    transition: color 0.2s ease;
 }
 
-/* Change summary color on hover to match your design links */
 .menu-container summary:hover {
-  color: var(--text-hover);
+    color: var(--text-hover);
 }
 
-/* Add a clean spacing layout when a dropdown is open */
 .menu-container details[open] > summary {
-  margin-bottom: 4px;
+    margin-bottom: 4px;
 }
 
-/* OPTIONAL: Custom arrow markers that match your text scaling */
 .menu-container summary::-webkit-details-marker {
-  color: var(--text-l2);
-  margin-right: 6px;
+    color: var(--text-l2);
+    margin-right: 6px;
 }
-
-
-
-
-
-
-
