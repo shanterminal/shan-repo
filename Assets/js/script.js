@@ -1,13 +1,37 @@
-const toggleBtn = document.getElementById('theme-toggle');
 const rootContainer = document.getElementById('menu-root');
+const settingsToggle = document.getElementById('settings-toggle');
+const themeMenu = document.getElementById('theme-menu');
 
-// 1. Maintain Light/Dark Toggling
-toggleBtn.addEventListener('click', () => {
-  document.body.classList.toggle('dark-mode');
-  toggleBtn.innerHTML = document.body.classList.contains('dark-mode') ? '⚪' : '⚫';
+// 1. Theme Engine Switcher Mechanics
+if (settingsToggle && themeMenu) {
+    // Open/Close Settings Dropdown Panel
+    settingsToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        themeMenu.classList.toggle('open');
+    });
+
+    // Close theme options menu immediately if user clicks background space zones
+    document.addEventListener('click', () => {
+        themeMenu.classList.remove('open');
+    });
+}
+
+// 2. Multi-Theme Switcher Selector Processing Loops
+document.querySelectorAll('.theme-opt').forEach(btn => {
+    btn.addEventListener('click', () => {
+        // Update active selection visual highlight indicator class state
+        document.querySelectorAll('.theme-opt').forEach(opt => opt.classList.remove('active'));
+        btn.classList.add('active');
+        
+        // Grab target theme identifier configuration string code data label attribute
+        const chosenTheme = btn.getAttribute('data-theme');
+        
+        // Inject color theme attribute setting right onto the root HTML element node
+        document.documentElement.setAttribute('data-app-theme', chosenTheme);
+    });
 });
 
-// 2. Main Coordinator to handle Instant Cache + Background Updating
+// 3. Main Coordinator to handle Instant Cache + Background Updating
 async function initRepository() {
     const cachedData = localStorage.getItem('shan_repo_cache');
     
@@ -26,7 +50,7 @@ async function initRepository() {
     await fetchLiveDriveUpdates(!!cachedData);
 }
 
-// 3. Fetch live data directly from Google API
+// 4. Fetch live data directly from Google API
 async function fetchLiveDriveUpdates(hasExistingCache) {
     // PASTE YOUR NEW ANONYMOUS WEB APP URL HERE
     const googleAppScriptUrl = "https://script.google.com/macros/s/AKfycbxCYzVw_8G47e6Ho-v6I0QEyfOnZAdUV2BEq4nue_jF0QUX0NqjGIM-5K9lfyheJSWa/exec";
@@ -54,7 +78,7 @@ async function fetchLiveDriveUpdates(hasExistingCache) {
     }
 }
 
-// 4. Render Top-Level Design Containers (Your Original Design)
+// 5. Render Top-Level Design Containers (Your Original Design)
 function buildMenu(data, container) {
     data.forEach(subject => {
         const ul = document.createElement('ul');
@@ -66,7 +90,7 @@ function buildMenu(data, container) {
     });
 }
 
-// 5. Transform Live JSON Layers into Your Original Design Elements
+// 6. Transform Live JSON Layers into Your Original Design Elements
 function renderNode(item, isTopLevel = false) {
     if (item.type === 'file') {
         const link = document.createElement('a');
